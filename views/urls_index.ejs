@@ -1,9 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<body>"
-    <!-- Write EJS code here to display shortened links -->
+<head>
+  <title>Tinyapp</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
     <% include ./partials/_header %>
-    <p><%= JSON.stringify(urls) %></p>
 
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6">
+          <% Object.keys(urls).forEach((key) => { %>
+            <p><%= key %></p>
+          <% }); %>
+        </div>
+
+        <div class="col-xs-6">
+          <% for (url in urls) { %>
+            <p><%= urls[url] %></p>
+          <% } %>
+        </div>
+      </div>
+    </div>
 </body>
 </html>

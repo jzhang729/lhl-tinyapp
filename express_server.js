@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 1337;
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const tinyapp = require("./tinyapp");
+const path = require("path");
 
 var urlDatabase = {
   "b2xVn2": "http://www.lighthouselabs.ca",
@@ -11,8 +12,10 @@ var urlDatabase = {
 }
 
 app.set("view engine", "ejs");
+app.use('/public', express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_DELETE"));
+
 
 app.get("/", (req, res) => {
   res.redirect("/urls");

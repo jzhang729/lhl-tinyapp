@@ -32,6 +32,7 @@
   }
 
   input[value=Delete] {
+    display: inline;
     padding: 0px;
     font-size: 10px;
     background: none;

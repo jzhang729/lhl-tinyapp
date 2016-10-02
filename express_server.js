@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 1337;
 const bodyParser = require("body-parser");
+const methodOverride = require("method-override");
 const tinyapp = require("./tinyapp");
 
 var urlDatabase = {
@@ -11,6 +12,7 @@ var urlDatabase = {
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride("_DELETE"));
 
 app.get("/", (req, res) => {
   res.redirect("/urls");
@@ -52,4 +54,11 @@ app.get("/u/:shortURL", (req, res) => {
   let shortURL = req.params.shortURL;
   let longURL = urlDatabase[shortURL];
   res.status(301).redirect(longURL);
+});
+
+app.post("/urls/:id", (req, res) => {
+  let shortURL = req.params.id;
+  console.log("Deleting: " + shortURL);
+  delete urlDatabase[shortURL];
+  res.redirect("/urls");
 });

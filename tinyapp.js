@@ -7,3 +7,10 @@ function generateRandomString () {
   }
   return text;
 };
+
+exports.insertURL = function (longURL, cb) {
+  let newURL = {
+    shortURL: generateRandomString(),
+    longURL: longURL
+  };
+}

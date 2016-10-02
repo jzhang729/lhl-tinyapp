@@ -14,7 +14,8 @@ var urlDatabase = {
 app.set("view engine", "ejs");
 app.use('/public', express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(methodOverride("_DELETE"));
+app.use(methodOverride("_method"));
+// app.use(methodOverride("_PUT"));
 
 app.get("/", (req, res) => {
   res.redirect("/urls");
@@ -41,10 +42,18 @@ app.get("/urls/new", (req, res) => {
   res.render("urls_new");
 });
 
-// app.get("/urls/:id", (req, res) => {
-//   let templateVars = { shortUrl: req.params.id };
-//   res.render("urls_show", templateVars);
-// });
+app.get("/urls/:id", (req, res) => {
+  let shortURL = req.params.id
+  res.render("urls_show", { value: shortURL });
+});
+
+app.put("/urls/:id", (req, res) => {
+  console.log("editing");
+  let shortURL = req.params.id;
+  console.log(req.body);
+  urlDatabase[shortURL] = req.body.longURL;
+  res.redirect("/urls");
+});
 
 app.post("/urls", (req, res) => {
   console.log(req.body);
@@ -58,7 +67,7 @@ app.get("/u/:shortURL", (req, res) => {
   res.status(301).redirect(longURL);
 });
 
-app.post("/urls/:id", (req, res) => {
+app.delete("/urls/:id", (req, res) => {
   let shortURL = req.params.id;
   console.log("Deleting: " + shortURL);
   delete urlDatabase[shortURL];

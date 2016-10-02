@@ -5,6 +5,19 @@
   </head>
   <body>
     <% include partials/_header %>
-    BLAH BLAH BLAH
+
+    <div id="menu">
+      <a href="/urls">Home</a>
+    </div>
+
+    <div id="content">
+        <h2>Short URL: <%= value %></h2>
+
+        <form method="POST" action="/urls/<%= value %>?_method=PUT">
+          <input id="longURL" type="text" name="longURL" placeholder="http://" />
+          <input type="submit" value="Update" />
+        </form>
+    </div>
+
   </body>
 </html>

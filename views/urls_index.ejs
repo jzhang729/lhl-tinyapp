@@ -6,18 +6,25 @@
 
 <body>
     <% include ./partials/_header %>
-    <a href="/urls/new">Create a new link here</a>
-    <dl>
-      <% Object.keys(urls).forEach((key) => { %>
-        <dt><%= key %></dt>
-          <dd>
-            <%= urls[key] %>
-            <form method="POST" action="/urls/<%= key %>?_method=DELETE">
-              <input type="submit" value="delete" style="display:inline"/>
-            </form>
-          </dd>
-          <br />
-      <% }); %>
-    </dl>
+
+    <div id="menu">
+      <a href="/urls/new">Create a new link here</a>
+    </div>
+
+    <div id="content">
+      <dl>
+        <% Object.keys(urls).forEach((key) => { %>
+          <dt><a href="/u/<%= key %>" target="_blank"><%= key %></a></dt>
+            <dd>
+              <%= urls[key] %>
+              <a href="/urls/<%= key %>" class="edit-link">Edit</a>
+              <form method="POST" action="/urls/<%= key %>?_method=DELETE">
+                <input type="submit" value="Delete" style="display:inline"/>
+              </form>
+            </dd>
+            <br />
+        <% }); %>
+      </dl>
+    </div>
 </body>
 </html>

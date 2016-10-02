@@ -16,7 +16,6 @@ app.use('/public', express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_DELETE"));
 
-
 app.get("/", (req, res) => {
   res.redirect("/urls");
 });

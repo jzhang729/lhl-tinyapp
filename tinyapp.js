@@ -14,3 +14,14 @@ exports.insertURL = function (longURL, cb) {
     longURL: longURL
   };
 }
+
+exports.getLongURL = function (db, shortURL, cb) {
+    let query = { "shortURL": shortURL };
+    db.collection("urls").findOne(query, (err, result) => {
+        if (err) {
+            return cb(err);
+        }
+
+        return cb(null, result.longURL);
+    });
+}

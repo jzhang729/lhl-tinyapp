@@ -39,16 +39,26 @@ app.get("/", (req, res) => {
 });
 
 app.get("/urls.json", (req, res) => {
-  res.json(urlDatabase);
+  tinyapp.getURLS(dbInstance, (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+
+    res.json(result);
+  })
 });
 
-// app.get("/hello", (req, res) => {
-//   res.end("<html><body>Hello <b>World</b></body></html>\n");
-// });
-
 app.get("/urls", (req, res) => {
-  let templateVars = { urls: urlDatabase };
-  res.render("urls_index", templateVars);
+  tinyapp.getURLS(dbInstance, (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+
+    let templateVars = {
+      urls: result
+    }
+    res.render("urls_index", templateVars);
+  });
 });
 
 app.get("/urls/new", (req, res) => {
@@ -68,24 +78,40 @@ app.get("/urls/:id", (req, res) => {
 
 app.put("/urls/:id", (req, res) => {
   let shortURL = req.params.id;
-  urlDatabase[shortURL] = req.body.longURL;
-  res.redirect("/urls");
+  tinyapp.updateURL(dbInstance, shortURL, req.body.longURL, (err, longURL) => {
+    res.redirect("/urls");
+  })
 });
 
 app.post("/urls", (req, res) => {
-  console.log(req.body);
-  res.send("OK");
-  res.redirect("/u/")
+  console.log("NEW URL ADDED: ",req.body.longURL);
+  let longURL = req.body.longURL;
+  tinyapp.insertURL(dbInstance, longURL, (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+
+    res.redirect("/urls");
+  });
 });
 
 app.get("/u/:shortURL", (req, res) => {
   let shortURL = req.params.shortURL;
-  let longURL = urlDatabase[shortURL];
-  res.status(301).redirect(longURL);
+  tinyapp.getLongURL(dbInstance, shortURL, (err, longURL) => {
+    if (err) {
+      console.log(err);
+    }
+
+    if (longURL.indexOf("http://") === -1) {
+      longURL = "http://" + longURL;
+    }
+    res.status(301).redirect(longURL);
+  });
 });
 
 app.delete("/urls/:id", (req, res) => {
   let shortURL = req.params.id;
-  delete urlDatabase[shortURL];
-  res.redirect("/urls");
+  tinyapp.deleteURL(dbInstance, shortURL, (err, longURL) => {
+    res.redirect("/urls");
+  });
 });

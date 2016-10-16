@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 1337;
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const methodOverride = require("method-override");
 const tinyapp = require("./tinyapp");
 const path = require("path");
@@ -15,8 +16,6 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
         console.log("Could not connect! Unexpected error. Details below.");
         throw err;
     }
-
-    console.log("Connected to the database!");
     dbInstance = db;
 });
 
@@ -29,6 +28,7 @@ app.set("view engine", "ejs");
 app.use('/public', express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use(cookieParser());
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
@@ -55,6 +55,7 @@ app.get("/urls", (req, res) => {
     }
 
     let templateVars = {
+      username: req.cookies["username"],
       urls: result
     }
     res.render("urls_index", templateVars);
@@ -62,13 +63,18 @@ app.get("/urls", (req, res) => {
 });
 
 app.get("/urls/new", (req, res) => {
-  res.render("urls_new");
+  let templateVars = {
+    username: req.cookies["username"]
+  }
+
+  res.render("urls_new", templateVars);
 });
 
 app.get("/urls/:id", (req, res) => {
   let shortURL = req.params.id
   tinyapp.getLongURL(dbInstance, shortURL, (err, longURL) => {
     let templateVars = {
+        username: req.cookies["username"],
         shortURL: shortURL,
         longURL: longURL
     };
@@ -95,6 +101,13 @@ app.post("/urls", (req, res) => {
   });
 });
 
+app.delete("/urls/:id", (req, res) => {
+  let shortURL = req.params.id;
+  tinyapp.deleteURL(dbInstance, shortURL, (err, longURL) => {
+    res.redirect("/urls");
+  });
+});
+
 app.get("/u/:shortURL", (req, res) => {
   let shortURL = req.params.shortURL;
   tinyapp.getLongURL(dbInstance, shortURL, (err, longURL) => {
@@ -109,9 +122,12 @@ app.get("/u/:shortURL", (req, res) => {
   });
 });
 
-app.delete("/urls/:id", (req, res) => {
-  let shortURL = req.params.id;
-  tinyapp.deleteURL(dbInstance, shortURL, (err, longURL) => {
-    res.redirect("/urls");
-  });
+app.post("/login", (req, res) => {
+  res.cookie("username", req.body.username);
+  res.redirect("/");
+});
+
+app.post("/logout", (req, res) => {
+  res.clearCookie("username");
+  res.redirect("/");
 });

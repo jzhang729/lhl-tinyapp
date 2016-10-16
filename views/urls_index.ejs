@@ -13,17 +13,17 @@
 
     <div id="content">
       <dl>
-        <% Object.keys(urls).forEach((key) => { %>
-          <dt><a href="/u/<%= key %>" target="_blank"><%= key %></a></dt>
+        <% for (url in urls) { %>
+          <dt><a href="/u/<%= urls[url].shortURL %>" target="_blank"><%= urls[url].shortURL %></a></dt>
             <dd>
-              <%= urls[key] %>
-              <a href="/urls/<%= key %>" class="edit-link">Edit</a>
-              <form method="POST" action="/urls/<%= key %>?_method=DELETE">
+              <%= urls[url].longURL %>
+              <a href="/urls/<%= urls[url].shortURL %>" class="edit-link">Edit</a>
+              <form method="POST" action="/urls/<%= urls[url].shortURL %>?_method=DELETE">
                 <input type="submit" value="Delete" />
               </form>
             </dd>
             <br />
-        <% }); %>
+        <% }; %>
       </dl>
     </div>
 </body>

@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <% include ./partials/_head %>
-  </head>
-  <body>
-
-    <% include partials/_header %>
-
-    <div id="menu">
-      <a href="/urls">Home</a>
-    </div>
+<% include ./partials/_head %>
+<body>
+  <% include ./partials/_header %>
+  <main class="mdl-layout__content">
+    <div class="page-content">
+      <!-- Your content goes here -->
 
     <div id="content">
       <form action="/urls" method="POST" style="margin:150px;">
@@ -18,5 +14,7 @@
         <input type="submit" value="Submit">
       </form>
     </div>
-  </body>
+  </main>
+  <% include ./partials/_footer %>
+</body>
 </html>

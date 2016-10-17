@@ -1,22 +1,33 @@
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-xs-offset-10"> -->
-<% if (!username) { %>
-  <div id="login">
-    <form action="/login" method="POST">
-      <label for="username">Username</label>
-      <input id="username" type="text" name="username" /><br />
-      <input type="submit" />
-    </form>
-  </div>
-<% } else { %>
-  <p><%= username %></p>
-  <form action="/logout" method="POST">
-    <input type="submit" value="Log Out" />
-  </form>
-<% } %>
-    <!-- </div>
-  </div>
-</div> -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<header class="mdl-layout__header">
+  <div class="mdl-layout__header-row">
+    <!-- Title -->
+    <span class="mdl-layout-title">TinyApp</span>
+    <!-- Add spacer, to align navigation to the right -->
+    <div class="mdl-layout-spacer"></div>
+    <!-- Navigation. We hide it in small screens. -->
+    <nav class="mdl-navigation mdl-layout--large-screen-only">
+      <!-- <a class="mdl-navigation__link" href="">Login</a> -->
 
-<h1>TinyApp</h1>
+      <!-- User is not logged in -->
+      <% if (!username) { %>
+        <div id="login">
+          <form action="/login" method="POST">
+            <label for="username">Username</label>
+            <input id="username" type="text" name="username" /><br />
+            <input type="submit" />
+          </form>
+        </div>
+      <% } else { %>
+        <!-- User is already logged in -->
+        <div id="login">
+          <p>Welcome <%= username %></p>
+          <form action="/logout" method="POST">
+            <input type="submit" value="Log Out" />
+          </form>
+        </div>
+      <% } %>
+    </nav>
+  </div>
+</header>
+<% include ./_menu %>

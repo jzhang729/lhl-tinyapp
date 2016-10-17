@@ -1,23 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <% include ./partials/_head %>
-  </head>
-  <body>
-    <% include partials/_header %>
-
-    <div id="menu">
-      <a href="/urls">Home</a>
-    </div>
-
+<% include ./partials/_head %>
+<body>
+  <% include ./partials/_header %>
+  <main class="mdl-layout__content">
+    <div class="page-content">
+      <!-- Your content goes here -->
     <div id="content">
         <h2>Short URL: <%= shortURL %></h2>
-
         <form method="POST" action="/urls/<%= shortURL %>?_method=PUT">
           <input id="longURL" type="text" name="longURL" placeholder="http://" />
           <input type="submit" value="Update" />
         </form>
     </div>
-
-  </body>
+  </div>
+</main>
+<% include ./partials/_footer %>
+</body>
 </html>

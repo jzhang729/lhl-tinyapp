@@ -1,30 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <% include ./partials/_head %>
-</head>
-
+<% include ./partials/_head %>
 <body>
-    <% include ./partials/_header %>
+  <% include ./partials/_header %>
+  <main class="mdl-layout__content">
+    <div class="page-content">
+      <!-- Your content goes here -->
+      <div id="content">
+        <ul class="mdl-list">
+            <% for (url in urls) { %>
+              <li class="mdl-list__item-primary-content list-item">
+                <i class="material-icons mdl-list__item-icon">open_in_new</i>
+                <span class="mdl-list__item-primary-content">
+                  <a href="/u/<%= urls[url].shortURL %>" target="_blank"><%= urls[url].shortURL %></a>
 
-    <div id="menu">
-      <a href="/urls/new">Create a new link here</a>
+                  <%= urls[url].longURL %>
+                  <a href="/urls/<%= urls[url].shortURL %>" class="edit-link">Edit</a>
+                  <form method="POST" action="/urls/<%= urls[url].shortURL %>?_method=DELETE">
+                    <input type="submit" value="Delete" />
+                  </form>
+                </span>
+              </li>
+            <% }; %>
+        </ul>
+      </div>
     </div>
-
-    <div id="content">
-      <dl>
-        <% for (url in urls) { %>
-          <dt><a href="/u/<%= urls[url].shortURL %>" target="_blank"><%= urls[url].shortURL %></a></dt>
-            <dd>
-              <%= urls[url].longURL %>
-              <a href="/urls/<%= urls[url].shortURL %>" class="edit-link">Edit</a>
-              <form method="POST" action="/urls/<%= urls[url].shortURL %>?_method=DELETE">
-                <input type="submit" value="Delete" />
-              </form>
-            </dd>
-            <br />
-        <% }; %>
-      </dl>
-    </div>
+  </main>
+  <% include ./partials/_footer %>
 </body>
 </html>

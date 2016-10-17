@@ -1,45 +1,35 @@
-  body {
-    margin: 10px;
-  }
+body {
+  margin: 0px;
+  padding: 0px; }
 
-  #content {
-    margin-left: 20px;
-  }
+#content {
+  margin-left: 250px; }
 
-  dl {
-    margin: 20px;
-  }
+li.list-item {
+  margin: 15px 0px; }
+  li.list-item i {
+    vertical-align: top; }
 
-  dt {
-    font-weight: bold;
-    display: inline-block;
-    vertical-align: top;
-    margin: 10px;
-  }
+form {
+  display: inline;
+  margin: 0px 5px; }
 
-  dd {
-    display: inline-block;
-    margin: 10px 15px;
-  }
+input[type=text] {
+  width: 300px; }
 
-  form {
-    display: inline;
-    margin: 0px 5px;
-  }
+input[value=Delete] {
+  display: inline;
+  padding: 0px;
+  font-size: 10px;
+  background: none;
+  color: red;
+  border: 0px; }
 
-  input[type=text] {
-    width: 300px;
-  }
+.edit-link {
+  font-size: 10px; }
 
-  input[value=Delete] {
-    display: inline;
-    padding: 0px;
-    font-size: 10px;
-    background: none;
-    color: red;
-    border: 0px;
-  }
-
-  .edit-link {
-    font-size: 10px;
-  }
+#login {
+  position: relative;
+  right: 25px; }
+  #login input#username {
+    width: 200px; }

@@ -15,10 +15,11 @@
                   <a href="/u/<%= urls[url].shortURL %>" target="_blank"><%= urls[url].shortURL %></a>
 
                   <%= urls[url].longURL %>
-                  <a href="/urls/<%= urls[url].shortURL %>" class="edit-link">Edit</a>
-                  <form method="POST" action="/urls/<%= urls[url].shortURL %>?_method=DELETE">
-                    <input type="submit" value="Delete" />
-                  </form>
+                  <!-- <a href="/urls/<%= urls[url].shortURL %>" class="edit-link">Edit</a> -->
+                  <a href="/urls/<%= urls[url].shortURL %>" class="edit-link"><i class="material-icons">mode_edit</i></a>
+                  <!-- <form method="POST" action="/urls/<%= urls[url].shortURL %>?_method=DELETE"> -->
+                    <i class="material-icons delete-link" style="color: red" data-id="<%= urls[url].shortURL %>">delete</i>
+                  <!-- </form> -->
                 </span>
               </li>
             <% }; %>

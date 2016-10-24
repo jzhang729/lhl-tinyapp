@@ -6,15 +6,15 @@
   <main class="mdl-layout__content">
     <div class="page-content">
       <!-- Your content goes here -->
-    <div id="content">
+      <div id="content">
         <h2>Short URL: <%= shortURL %></h2>
         <form method="POST" action="/urls/<%= shortURL %>?_method=PUT">
           <input id="longURL" type="text" name="longURL" placeholder="http://" />
           <input type="submit" value="Update" />
         </form>
+      </div>
     </div>
-  </div>
-</main>
-<% include ./partials/_footer %>
+  </main>
+  <% include ./partials/_footer %>
 </body>
 </html>

@@ -1,8 +1,9 @@
 <div class="mdl-layout__drawer">
-  <span class="mdl-layout-title"><a href="/">TinyApp</a></span>
+  <span class="mdl-layout-title">TinyApp</span>
   <nav class="mdl-navigation">
-    <a class="mdl-navigation__link" href="/">Go Home</a>
     <a class="mdl-navigation__link" href="/urls/new">Add New Link</a>
-    <a class="mdl-navigation__link" href="#" id="logout">Logout</a>
+    <% if (username) { %>
+      <a class="mdl-navigation__link" href="#" id="logout">Logout</a>
+    <% } %>
   </nav>
 </div>

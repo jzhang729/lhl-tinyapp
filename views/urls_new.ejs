@@ -6,13 +6,13 @@
   <main class="mdl-layout__content">
     <div class="page-content">
       <!-- Your content goes here -->
-
-    <div id="content">
-      <form action="/urls" method="POST" style="margin:150px;">
-        <label for="longURL">Enter a URL:</label>
-        <input id="longURL" type="text" name="longURL" placeholder="http://">
-        <input type="submit" value="Submit">
-      </form>
+      <div id="content">
+        <form action="/urls" method="POST">
+          <label for="longURL">Enter a URL:</label>
+          <input id="longURL" type="text" name="longURL" placeholder="http://">
+          <input type="submit" value="Submit">
+        </form>
+      </div>
     </div>
   </main>
   <% include ./partials/_footer %>

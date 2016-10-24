@@ -7,24 +7,24 @@
     <div class="page-content">
       <!-- Your content goes here -->
       <div id="content">
-        <ul class="mdl-list">
-            <% for (url in urls) { %>
-              <li class="mdl-list__item-primary-content list-item">
-                <i class="material-icons mdl-list__item-icon">open_in_new</i>
-                <span class="mdl-list__item-primary-content">
-                  <a href="/u/<%= urls[url].shortURL %>" target="_blank"><%= urls[url].shortURL %></a>
-
-                  <%= urls[url].longURL %>
-                  <!-- <a href="/urls/<%= urls[url].shortURL %>" class="edit-link">Edit</a> -->
-                  <a href="/urls/<%= urls[url].shortURL %>" class="edit-link"><i class="material-icons">mode_edit</i></a>
-                  <!-- <form method="POST" action="/urls/<%= urls[url].shortURL %>?_method=DELETE"> -->
-                    <i class="material-icons delete-link" style="color: red" data-id="<%= urls[url].shortURL %>">delete</i>
-                  <!-- </form> -->
-                </span>
-              </li>
-            <% }; %>
-        </ul>
-      </div>
+          <ul class="mdl-list">
+              <% for (url in urls) { %>
+                <li class="mdl-list__item-primary-content list-item">
+                  <i class="material-icons mdl-list__item-icon">open_in_new</i>
+                  <span class="mdl-list__item-primary-content">
+                    <a href="/u/<%= urls[url].shortURL %>" target="_blank"><%= urls[url].shortURL %></a>
+                    <%= urls[url].longURL %>
+                    <!-- <a href="/urls/<%= urls[url].shortURL %>" class="edit-link">Edit</a> -->
+                    <a href="/urls/<%= urls[url].shortURL %>" class="edit-link"><i class="material-icons">mode_edit</i></a>
+                    <form method="POST" action="/urls/<%= urls[url].shortURL %>?_method=DELETE">
+                      <input type="submit" value="Delete" />
+                      <!-- <i class="material-icons delete-link" style="color: red" data-id="<%= urls[url].shortURL %>">delete</i> -->
+                    </form>
+                  </span>
+                </li>
+              <% }; %>
+          </ul>
+      </div><!-- /content -->
     </div>
   </main>
   <% include ./partials/_footer %>

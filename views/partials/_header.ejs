@@ -7,28 +7,29 @@
     <div class="mdl-layout-spacer"></div>
     <!-- Navigation. We hide it in small screens. -->
     <nav class="mdl-navigation mdl-layout--large-screen-only">
-      <!-- <a class="mdl-navigation__link" href="">Login</a> -->
 
-      <!-- User is not logged in -->
-      <% if (!username) { %>
-        <div id="user-not-logged-in">
-          <form action="/login" method="POST">
-            <label for="username">Username</label>
-            <input id="username" type="text" name="username" /><br />
-            <input type="submit" />
-          </form>
-        </div>
-      <% } else { %>
-        <!-- User is already logged in -->
-        <div id="user-logged-in">
-          <p>Welcome <%= username %></p>
-          <!-- <form action="/logout" method="POST">
-            <input type="submit" value="Log Out" />
-          </form> -->
-          <a href="#" id="logout">Logout</a>
-        </div>
-      <% } %>
     </nav>
   </div>
 </header>
 <% include ./_menu %>
+
+<!-- <a class="mdl-navigation__link" href="">Login</a> -->
+<div id="login">
+  <% if (!username) { %>
+    <div id="user-not-logged-in">
+      <form action="/login" method="POST" id="login-form">
+        <label for="username">Username</label>
+        <input type="text" name="username" />
+        <input type="submit" />
+      </form>
+    </div>
+  <% } else { %>
+
+    <div id="user-logged-in">
+      <p><strong>Welcome</strong> <%= username %></p>
+      <form action="/logout" method="POST" id="login-form">
+        <input type="submit" value="Log Out" />
+      </form>
+    </div>
+  <% } %>
+</div>

@@ -19,13 +19,14 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
     dbInstance = db;
 });
 
-var urlDatabase = {
-  "b2xVn2": "http://www.lighthouselabs.ca",
-  "9sm5xk": "http://www.google.com"
-}
+// var urlDatabase = {
+//   "b2xVn2": "http://www.lighthouselabs.ca",
+//   "9sm5xk": "http://www.google.com"
+// }
 
 app.set("view engine", "ejs");
 app.use("/node_modules/material-design-lite", express.static(__dirname + "/node_modules/material-design-lite"));
+app.use("/node_modules/jquery", express.static(__dirname + "/node_modules/jquery"));
 app.use("/public", express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
@@ -91,7 +92,6 @@ app.put("/urls/:id", (req, res) => {
 });
 
 app.post("/urls", (req, res) => {
-  console.log("NEW URL ADDED: ",req.body.longURL);
   let longURL = req.body.longURL;
   tinyapp.insertURL(dbInstance, longURL, (err, result) => {
     if (err) {
